@@ -20,9 +20,11 @@
             }
         };
 
-        var Request = function (url) {
+        var Request = function (url, method) {
 
             var scope = this;
+            var data;
+            var contentType;
             var onSuccess, onFail;
             var response;
 
@@ -41,6 +43,20 @@
                 }
             };
 
+            this.data = function (payload) {
+
+                if (true || window.FormData == undefined) {
+                    contentType = 'application/x-www-form-urlencoded';
+                    data = {};
+                    for (key in payload) {
+                        data[payload[key].name] = payload[key].value;
+                    }
+                }
+                else {
+                    data = new FormData(payload)
+                }
+            };
+
             this.success = function (callback) {
                 onSuccess = callback;
                 return scope;
@@ -51,17 +67,24 @@
                 return scope;
             };
             this.send = function () {
-                httpRequest.open('GET', url, true);
-                httpRequest.send(null);
+                httpRequest.open(method, url, true);
+                if (method == "POST") {
+                    if (contentType) {
+                        httpRequest.setRequestHeader("Content-type", contentType);
+                    }
+                    httpRequest.send(data);
+                } else if (method == "GET") {
+                    httpRequest.send();
+                }
             };
         };
 
-        this.post = function () {
-
+        this.post = function (url) {
+            return new Request(url, "POST");
         };
 
         this.get = function (url) {
-            return new Request(url);
+            return new Request(url, "GET");
         };
     }
     window.server = new Server();

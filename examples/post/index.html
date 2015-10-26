@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shCore.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shThemeDefault.min.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shCore.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shAutoloader.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushJScript.min.js"></script>
+
+        <script type="text/javascript" src="../../js/server.js"></script>
+    </head>
+    <body>
+
+        <h1>POST</h1>
+
+        <pre class="brush: js;">
+            server
+            .post("/examples/post/Page.asp")
+            .data({ message: "Hello world!"})
+            .success(function (response) { })
+            .fail(function (response) { })
+            .send();
+        </pre>
+
+        <script type="text/javascript">
+            
+            // This fails
+            server.post("/examples/post/Page.nonexisting")
+                .data({})
+                .fail(function (state) {
+                    var d = document.getElementById("fail");
+                    d.innerHTML = "Failed with code " + state.status;
+                })
+                .send();
+
+            // This succeeds
+            server.post("/examples/post/Page.asp")
+                .data({ message: "Hello world!"})
+                .success(function (message) {
+                    var d = document.getElementById("success");
+                    d.innerHTML = message;
+                })
+                .send();
+
+        </script>
+
+        <h1>Results</h1>
+
+        <h3>Succeed</h3>
+        <div id="success"></div>
+
+        <h3>Fails</h3>
+        <div id="fail"></div>
+
+        <script type="text/javascript">
+            SyntaxHighlighter.all();
+        </script>
+    </body>
+</html>

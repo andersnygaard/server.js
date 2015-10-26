@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+        <script type="text/javascript" src="../../js/server.js"></script>
+    </head>
+    <body>
+
+        <script type="text/javascript">
+            
+            // This fails
+            server.get("/examples/ajax/data.json").fail(function (state) {
+                var d = document.getElementById("fail");
+                d.innerHTML = "Failed with code " + state.status;
+            }).send();
+
+            // This succeeds
+            server.get("/examples/ajax/data.txt").success(function (message) {
+                var d = document.getElementById("success");
+                d.innerHTML = message;
+            }).send();
+
+        </script>
+
+        <h1>Example</h1>
+
+        <h3>Succeed</h3>
+        <div id="success"></div>
+
+        <h3>Fails</h3>
+        <div id="fail"></div>
+    </body>
+</html>
