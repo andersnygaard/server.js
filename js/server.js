@@ -4,6 +4,8 @@
     var Server = function () {
         var self = this;
 
+        var fakes = {};
+
         var httpRequestFactory = {
             create: function () {
 
@@ -45,15 +47,18 @@
 
             this.data = function (payload) {
 
-                if (true || window.FormData == undefined) {
-                    contentType = 'application/x-www-form-urlencoded';
-                    data = {};
-                    for (key in payload) {
-                        data[payload[key].name] = payload[key].value;
+                contentType = 'application/x-www-form-urlencoded';
+                data = "";
+                for (var key in payload) {
+                    if (data !== "") {
+                        data += "&";
                     }
+                    data += encodeURIComponent(key) + "=" + encodeURIComponent(payload[key]);
                 }
-                else {
-                    data = new FormData(payload)
+
+                if (window.FormData !== undefined) {
+                    data = new FormData()
+                    data.append(payload);
                 }
             };
 
@@ -67,6 +72,12 @@
                 return scope;
             };
             this.send = function () {
+
+                if (fakes[url]) {
+                    onSuccess(fakes[url]);
+                    return;
+                }
+
                 httpRequest.open(method, url, true);
                 if (method == "POST") {
                     if (contentType) {
@@ -86,6 +97,10 @@
         this.get = function (url) {
             return new Request(url, "GET");
         };
+
+        this.fake = function (url, data) {
+            fakes[url] = data;
+        }
     }
     window.server = new Server();
 

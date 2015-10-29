@@ -4,32 +4,56 @@
     <head>
         <meta charset="utf-8" />
         <title></title>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shCore.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shThemeDefault.min.css">
+        <link rel="stylesheet" type="text/css" href="../style.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shCore.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shAutoloader.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushJScript.min.js"></script>
+
         <script type="text/javascript" src="../../js/server.js"></script>
     </head>
     <body>
 
-        <script type="text/javascript">
+        <section class="header">
+            .fake(url, data)
+        </section>
+        <section class="description">
+            Mocks the output of an endpoint on the server. Alllows you to specify the output of a particular url.
+        </section>
+
+        <h3>Code example</h3>
+
+        <section class="code">
+            <pre class="brush: js;">
+                server.fake("/foo/bar/", "Hello world!");
+
+                server.get("/foo/bar/").success(function (message) {
+                    document.getElementById("success").innerHTML = message;
+                }).send();
+            </pre>
+        </section>
+
+        <h3>Output from example code:</h3>
+        
+        <section class="output">
+        
+            <div id="success"></div>
+
+            <script type="text/javascript">
             
-            // This fails
-            server.get("/examples/ajax/data.json").fail(function (state) {
-                var d = document.getElementById("fail");
-                d.innerHTML = "Failed with code " + state.status;
-            }).send();
+                server.fake("/foo/bar/", "Hello world!");
 
-            // This succeeds
-            server.get("/examples/ajax/data.txt").success(function (message) {
-                var d = document.getElementById("success");
-                d.innerHTML = message;
-            }).send();
+                server.get("/foo/bar/").success(function (message) {
+                    document.getElementById("success").innerHTML = message;
+                }).send();
 
+            </script>
+
+        </section>
+
+        <script type="text/javascript">
+            SyntaxHighlighter.all();
         </script>
-
-        <h1>Example</h1>
-
-        <h3>Succeed</h3>
-        <div id="success"></div>
-
-        <h3>Fails</h3>
-        <div id="fail"></div>
     </body>
 </html>

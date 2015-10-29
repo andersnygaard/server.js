@@ -6,6 +6,7 @@
         <title></title>
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shCore.min.css">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shThemeDefault.min.css">
+        <link rel="stylesheet" type="text/css" href="../style.css">
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shCore.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shAutoloader.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushJScript.min.js"></script>
@@ -14,43 +15,70 @@
     </head>
     <body>
 
-        <h1>GET</h1>
+        <section class="header">
+            .get(url)
+        </section>
+        <section class="description">
+            Creates an XHR request to the server with the GET verb.
+        </section>
 
-        <pre class="brush: js;">
-            server
-            .get("/examples/get/data.txt")
-            .data({ message: "Hello world!"})
-            .success(function (response) { })
-            .fail(function (response) { })
-            .send();
-        </pre>
+        <h3>Code example</h3>
 
-        <script type="text/javascript">
-            
-            // This fails
-            server.get("/examples/get/data.nonexisting").fail(function (state) {
-                var d = document.getElementById("fail");
-                d.innerHTML = "Failed with code " + state.status;
-            }).send();
+        <section class="code">
+            <pre class="brush: js;">
+                server
+                .get("/examples/get/data.txt")
+                .success(function (response) {
+                    document
+                        .getElementById("success")
+                        .innerHTML = response;
+                })
+                .send();
 
-            // This succeeds
-            server.get("/examples/get/data.txt").success(function (message) {
-                var d = document.getElementById("success");
-                d.innerHTML = message;
-            }).send();
+                server
+                .get("/foo/bar")
+                .fail(function (response) {
+                    document
+                        .getElementById("fail")
+                        .innerHTML = "Failed";
+                })
+                .send();
+            </pre>
+        </section>
 
-        </script>
-
-        <br>
-        <br>
-
-        <h1>Results</h1>
-
-        <h3>Succeed</h3>
+        <h3>Output from example code:</h3>
+        
         <div id="success"></div>
 
-        <h3>Fails</h3>
         <div id="fail"></div>
+
+        <section class="output">
+        
+            <div id="success"></div>
+
+            <script type="text/javascript">
+            
+                server
+                .get("/examples/get/data.txt")
+                .success(function (response) {
+                    document
+                        .getElementById("success")
+                        .innerHTML = response;
+                })
+                .send();
+
+                server
+                .get("/foo/bar")
+                .fail(function (response) {
+                    document
+                        .getElementById("fail")
+                        .innerHTML = "Failed";
+                })
+                .send();
+
+            </script>
+
+        </section>
 
         <script type="text/javascript">
             SyntaxHighlighter.all();
