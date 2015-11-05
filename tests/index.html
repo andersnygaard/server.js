@@ -1,0 +1,25 @@
+<html>
+<head>
+    <script type = "text/javascript" src = "simplejsunit.js"></script> 
+    <script type = "text/javascript" src = "simplejsunit.testrunner.js"></script>
+    <script type="text/javascript" src="../js/server.js"></script>
+    <script type="text/javascript">
+
+        tests.add("server", function () {
+            that(server).should().notBeNull();
+        });
+
+        tests.add("server.get", function () {
+            that(server.get).should().beInstanceOf("function");
+            that(server.get).should().beInstanceOf("function");
+            that(server.get).should().beInstanceOf("function");
+        });
+
+        tests.add("server.post", function () {
+            that(server.post).should().beInstanceOf("function");
+        });
+    </script>
+</head>
+<body>
+</body>
+</html>

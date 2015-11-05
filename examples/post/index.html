@@ -6,7 +6,7 @@
         <title></title>
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shCore.min.css">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shThemeDefault.min.css">
-        <link rel="stylesheet" type="text/css" href="../style.css">
+        <link rel="stylesheet" type="text/css" href="../../style.css">
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shCore.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shAutoloader.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushJScript.min.js"></script>
@@ -55,25 +55,25 @@
             <div id="success"></div>
 
             <script type="text/javascript">
-            
+
+                var postBody = { message: "Success", foo: "bar" };
+                
                 server
                 .post("/examples/post/Page.asp")
-                .data({ message: "Success", foo:"bar"})
+                .data(postData)
                 .success(function (response) {
                     var d = document.getElementById("success");
                     d.innerHTML = response;
                 })
                 .send();
-
                 server
                 .post("/foo/bar")
-                .data({})
+                .data(postData)
                 .fail(function (state) {
                     var d = document.getElementById("fail");
                     d.innerHTML = "Fail";
                 })
                 .send();
-
             </script>
 
         </section>

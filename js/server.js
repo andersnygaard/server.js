@@ -29,6 +29,7 @@
             var contentType;
             var onSuccess, onFail;
             var response;
+            this._period = 0;
 
             var httpRequest = httpRequestFactory.create();
             httpRequest.onreadystatechange = function () {
@@ -62,6 +63,26 @@
                 }
             };
 
+            this.every = function (period) {
+                period = period;
+
+                var periodScope = function (scope) {
+                    var scope = scope;
+                    this.seconds = function () {
+                        return scope;
+                    }
+
+                    this.minutes = function () {
+                        scope._period = scope._period * 60;
+                        return scope;
+                    }
+                }
+
+                return {
+
+                };
+            }
+
             this.success = function (callback) {
                 onSuccess = callback;
                 return scope;
@@ -74,8 +95,22 @@
             this.send = function () {
 
                 if (fakes[url]) {
-                    onSuccess(fakes[url]);
+
+                    var callCallbackWithFakeData = function () {
+                        onSuccess(fakes[url]);
+                    }
+
+                    if (period !== 0) {
+                        setInterval(callCallbackWithFakeData, period * 1000);
+                    } else {
+                        callCallbackWithFakeData();
+                    }
+
                     return;
+                }
+
+                var callCalllBack = function () {
+                    httpRequest.send(data);
                 }
 
                 httpRequest.open(method, url, true);
@@ -83,9 +118,12 @@
                     if (contentType) {
                         httpRequest.setRequestHeader("Content-type", contentType);
                     }
-                    httpRequest.send(data);
-                } else if (method == "GET") {
-                    httpRequest.send();
+                }
+
+                if (period) {
+                    callCalllBack();
+                }else{
+                    setInterval(callCalllBack, period * 1000);
                 }
             };
         };

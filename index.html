@@ -3,19 +3,87 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
+        <link rel="icon" type="image/png" href="/icons/favicon.ico" />
         <title></title>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shCore.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shThemeDefault.min.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shCore.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shAutoloader.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushJScript.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        
     </head>
     <body>
-        <h1>server.js</h1>
+        
+        <table style="width: 100%;">
+            <tr>
+                <td style="width: 100%;">
+                    <div style="background-color: #292933;width: 98%;color: #ffffff;font-size: 38px;color: #ffffff;padding: 5px;">
+                        &nbsp;server.js
+                    </div> 
+                </td>
+                <td>
+                    <img src="icons/server_mid.png"/>
+                </td>
+            </tr>
+        </table>
+        <h3>Keep it simple!</h3>
+        Server.js is just a small javascript that handles data to and from the server.
+        <section class="code">
+            <pre class="brush: js;">
+                
+                server.get("/foo/bar/")
+                    .every(30).seconds()
+                    .success(handleSuccess)
+                    .fail(handleFailure)
+                    .send();
+            </pre>
+        </section>
 
-        <h3>Examples</h3>
+        <h3>What can it do?</h3>
+        <ul>
+            <li>Send XMLHttpRequests to the server with GET, POST, HEAD verbs</li>
+            <li>Cache requests on the client within a session</li>
+            <li>Detect offline and serve cached data when offline</li>
+            <li>Periodical polling</li>
+            <li>Fake endpoints for testing</li>
+        </ul>
+        <br>
+        <br>
+
+
+        <section class="header">
+            Documentation
+        </section>
+
+        <h3>Ajax requests</h3>
         <p>
-            <b>AJAX requests</b><br>
             <a href="examples/post/">POST</a><br>
             <a href="examples/get/">GET</a><br>
-        </p><p>
-            <b>Testing</b><br>
-            <a href="examples/fake/">Fake</a><br>
         </p>
+
+        <h3>Caching</h3>
+        <p>
+            <a href="examples/post/">Periodical server calls</a><br>
+        </p>
+
+        <h3>Offline</h3>
+        <p>
+            <a href="examples/post/">Periodical server calls</a><br>
+        </p>
+
+        <h3>Periodical</h3>
+        <p>
+            <a href="examples/post/">Periodical server calls</a><br>
+        </p>
+
+        <h3>Testing</h3>
+        <p>
+            <a href="examples/fake/">Fake endpoints</a><br>
+        </p>
+
+        <script type="text/javascript">
+            SyntaxHighlighter.all();
+        </script>
     </body>
 </html>
